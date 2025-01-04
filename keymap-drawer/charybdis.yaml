@@ -35,7 +35,7 @@ layers:
   - {t: ',', h: HYPER}
   - {t: ., h: MEH}
   - /
-  - DEV TOOLS
+  - {t: EXTRAS, h: toggle}
   - SCRL SLOW
   - L CLK
   - {t: BACK SPACE, h: NUM}
