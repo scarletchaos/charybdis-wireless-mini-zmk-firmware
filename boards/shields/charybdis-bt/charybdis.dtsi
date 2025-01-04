@@ -45,8 +45,5 @@
         wakeup-source;
         diode-direction = "row2col";
     };
-
-    gpio1 {
-        status = "okay";
-    };
 };
+
