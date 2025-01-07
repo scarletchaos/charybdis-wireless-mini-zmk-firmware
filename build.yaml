@@ -31,7 +31,6 @@ include:
     format: bt
     artifact-name: charybdis_qwerty_right
     snippet: studio-rpc-usb-uart
-    snippet: zmk-usb-logging
 
   # # Colemak DH BT
   # - board: nice_nano_v2
