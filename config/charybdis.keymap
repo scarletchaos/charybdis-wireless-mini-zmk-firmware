@@ -81,14 +81,16 @@
             quick-tap-ms = <150>; // If you press a tapped hold-tap again within quick-tap-ms milliseconds of the first press, it will always trigger the tap behavior.
             require-prior-idle-ms = <185>; // like quick-tap-ms however it will apply for any non-modifier key pressed before it
             bindings = <&kp>, <&kp>;
-  // hold, tap
+
+            // hold, tap
         };
 
         td_cursor: td_scroll_or_cursor {
             compatible = "zmk,behavior-tap-dance";
             #binding-cells = <0>;
             bindings = <&lt 9 ESC>, <&to 8>;
- // hold, tap, double_tap
+
+            // hold, tap, double_tap
         };
 
         httl: ht_two_layers {
@@ -104,7 +106,8 @@
             compatible = "zmk,behavior-tap-dance";
             #binding-cells = <0>;
             bindings = <&to 0>, <&to 5>, <&to 4>;
- // tap, double_tap, tripple_tap
+
+            // tap, double_tap, tripple_tap
         };
 
         td_clk_scrl: td_click_or_scroll {
@@ -112,7 +115,8 @@
             #binding-cells = <0>;
             tapping-term-ms = <250>;
             bindings = <&mkp RCLK>, <&mo 9>;
-  // tap/hold, double_tap
+
+            // tap/hold, double_tap
         };
 
         td_bore: BASE_or_EXTRA {
@@ -181,10 +185,10 @@
 
         BASE {
             bindings = <
-&to 0            &kp Q    &kp W                     &kp E                         &kp R             &kp T          &kp Y            &kp U             &kp I                             &kp O                          &kp P               &kp LEFT_BRACKET
-&hm LCMD TAB     &lt 2 A  &hm LEFT_ALT S            &hm LCTRL D                   &hm LEFT_SHIFT F  &kp G          &kp H            &hm LEFT_SHIFT J  &hm RCTRL K                       &hm RIGHT_ALT L                &hm LCMD SEMICOLON  &kp SINGLE_QUOTE
-&kp C_AC_SEARCH  &kp Z    &hm LC(LA(LEFT_SHIFT)) X  &hm LA(LC(LG(LEFT_SHIFT))) C  &kp V             &kp B          &kp N            &kp M             &hm LA(LC(LG(LEFT_SHIFT))) COMMA  &hm LC(LA(LEFT_SHIFT)) PERIOD  &kp FSLH            &kp F12
-                                                    &td_cursor                    &mkp LCLK         &lt 1 SPACE    &lt 7 BACKSPACE  &lt 3 RET
+&kp ESCAPE    &kp Q    &kp W                     &kp E                         &kp R             &kp T          &kp Y            &kp U             &kp I                             &kp O                          &kp P               &kp LEFT_BRACKET
+&hm LCMD TAB  &lt 2 A  &hm LEFT_ALT S            &hm LCTRL D                   &hm LEFT_SHIFT F  &kp G          &kp H            &hm LEFT_SHIFT J  &hm RCTRL K                       &hm RIGHT_ALT L                &hm LCMD SEMICOLON  &kp SINGLE_QUOTE
+&to 0         &kp Z    &hm LC(LA(LEFT_SHIFT)) X  &hm LA(LC(LG(LEFT_SHIFT))) C  &kp V             &kp B          &kp N            &kp M             &hm LA(LC(LG(LEFT_SHIFT))) COMMA  &hm LC(LA(LEFT_SHIFT)) PERIOD  &kp FSLH            &kp F12
+                                                 &td_cursor                    &mkp LCLK         &lt 1 SPACE    &lt 7 BACKSPACE  &lt 3 RET
             >;
         };
 
