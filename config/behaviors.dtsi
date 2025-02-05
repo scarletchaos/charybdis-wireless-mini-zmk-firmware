@@ -42,7 +42,14 @@
             compatible = "zmk,behavior-tap-dance";
             #binding-cells = <0>;
             tapping-term-ms = <85>;
-            bindings = <&lt 2 SPACE>, <&kp SPACE>; // hold, tap, double_tap
+            bindings = <&lt 1 SPACE>, <&kp SPACE>; // hold, tap, double_tap
+        };
+
+        td_return: td_return {
+            compatible = "zmk,behavior-tap-dance";
+            #binding-cells = <0>;
+            tapping-term-ms = <85>;
+            bindings = <&lt 2 RETURN>, <&kp RETURN>; // hold, tap, double_tap
         };
 
         td_bs: td_bs {

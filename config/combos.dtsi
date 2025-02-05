@@ -10,12 +10,12 @@
 
         MiddleClick {
             bindings = <&mkp MCLK>;
-            key-positions = <28 37>;
+            key-positions = <28 38>;
         };
 
         RightClick {
             bindings = <&mkp RCLK>;
-            key-positions = <16 37>;
+            key-positions = <16 38>;
         };
 
         RightParen {
