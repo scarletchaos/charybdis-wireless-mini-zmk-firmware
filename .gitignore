@@ -1,2 +1,7 @@
 boards/shields/charybdis/charybdis.keymap
 drivers/
+zmk/
+build/
+zephyr/
+.west/
+modules/
