@@ -20,14 +20,14 @@
         y-input-code = <INPUT_REL_Y>;
         scale-multiplier = <4>;
         scale-divisor = <5>;
-        // bindings = <&ib_toggle_layer 7>;
+        bindings = <&ib_toggle_layer 4>;
     };
 
     /* input config for snipe mode */
     trackball_snipe_listener {
         compatible = "zmk,input-behavior-listener";   
         device = <&vtrackball>;
-        layers = <8>;
+        layers = <6>;
         evt-type = <INPUT_EV_REL>;
         x-input-code = <INPUT_REL_X>;
         y-input-code = <INPUT_REL_Y>;
@@ -39,7 +39,7 @@
     trackball_scroll_listener {
         compatible = "zmk,input-behavior-listener";
         device = <&vtrackball>;
-        layers = <9>;
+        layers = <5>;
         evt-type = <INPUT_EV_REL>;            
         x-input-code = <INPUT_REL_MISC>;
         y-input-code = <INPUT_REL_WHEEL>;
@@ -89,7 +89,7 @@
 &kp ESC  &kp Q             &kp W             &kp E          &kp R               &kp T    &kp Y            &kp U               &kp I          &kp O              &kp P                 &kp LEFT_BRACKET
 &kp TAB  &u_mt LEFT_GUI A  &u_mt LEFT_ALT S  &u_mt LCTRL D  &u_mt LEFT_SHIFT F  &kp G    &kp H            &u_mt LEFT_SHIFT J  &u_mt RCTRL K  &u_mt RIGHT_ALT L  &u_mt RIGHT_GUI SEMI  &kp APOS
 &mo 5    &kp Z             &kp X             &kp C          &kp V               &kp B    &kp N            &kp M               &kp COMMA      &kp DOT            &kp FSLH              &mo 5
-                                             &kp LGUI       &kp SPACE           &mo 1    &lt 2 BACKSPACE  &kp RET
+                                             &kp BACKSPACE  &kp SPACE           &mo 1    &mo 2            &kp RET
             >;
         };
 
@@ -122,14 +122,23 @@
 
         AUTO-MOUSE {
             bindings = <
-&trans  &trans  &trans  &trans     &trans  &trans       &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans     &trans  &trans       &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans     &trans  &trans       &trans  &trans  &trans  &trans  &trans  &trans
-                        &mkp LCLK  &trans  &mkp RCLK    &trans  &trans
+&trans  &trans  &trans  &trans     &trans     &trans       &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &mo 6   &trans  &trans     &trans     &trans       &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans     &trans     &trans       &trans  &trans  &trans  &trans  &trans  &trans
+                        &mkp LCLK  &mkp MCLK  &mkp RCLK    &trans  &trans
             >;
         };
 
         SCROLL {
+            bindings = <
+&trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans  &trans
+                        &trans  &trans  &trans    &trans  &trans
+            >;
+        };
+
+        PRECISION {
             bindings = <
 &trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans  &trans
 &trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans  &trans
