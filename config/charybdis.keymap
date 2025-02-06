@@ -95,9 +95,9 @@
 
         NAV {
             bindings = <
-&trans  &trans    &kp UP    &trans     &trans  &trans    &kp N7           &kp N8                &kp N9          &kp N0  &kp HOME  &kp RIGHT_BRACKET
-&trans  &kp LEFT  &kp DOWN  &kp RIGHT  &trans  &trans    &kp N4           &u_mt RIGHT_SHIFT N5  &u_mt RCTRL N6  &trans  &trans    &kp F10
-&trans  &trans    &trans    &trans     &trans  &trans    &kp N1           &kp N2                &kp N3          &trans  &trans    &kp F20
+&trans  &trans    &kp UP    &trans     &trans  &trans    &trans &kp N7           &kp N8                &kp N9          &kp HOME  &kp RIGHT_BRACKET
+&trans  &kp LEFT  &kp DOWN  &kp RIGHT  &trans  &trans    &trans &kp N4           &u_mt RIGHT_SHIFT N5  &u_mt RCTRL N6  &trans    &kp F10
+&trans  &trans    &trans    &trans     &trans  &trans    &trans &kp N1           &kp N2                &kp N3          &trans    &kp F20
                             &trans     &trans  &trans    &lt 3 N0  &kp BACKSPACE
             >;
         };
@@ -105,7 +105,7 @@
         SYMNUM {
             bindings = <
 &bt BT_CLR  &kp EXCL      &kp AT       &kp HASH    &kp DLLR  &kp PRCNT    &kp CARET  &kp AMPS                 &kp KP_MULTIPLY   &kp LPAR              &kp RPAR              &kp DEL
-&trans      &trans        &bt BT_PRV   &bt BT_NXT  &trans    &trans       &kp UNDER  &u_mt RIGHT_SHIFT EQUAL  &u_mt RCTRL LBKT  &u_mt RIGHT_ALT RBKT  &u_mt RIGHT_GUI BSLH  &kp GRAVE
+&trans      &trans        &bt BT_PRV   &bt BT_NXT  &trans    &trans       &kp LEFT   &kp DOWN                 &kp UP            &kp RIGHT             &u_mt RIGHT_GUI BSLH  &kp GRAVE
 &trans      &out OUT_TOG  &bootloader  &trans      &trans    &trans       &kp MINUS  &kp PLUS                 &kp LBRC          &kp RBRC              &kp PIPE              &kp TILDE
                                        &trans      &trans    &mo 3        &trans     &trans
             >;
