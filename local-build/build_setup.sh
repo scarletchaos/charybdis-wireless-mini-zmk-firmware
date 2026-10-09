@@ -153,11 +153,11 @@ build_firmware() {
   printf '  %s\n' "$build_dir"
 
   # Apply studio-rpc-usb-uart to USB central shields only.
-  # charybdis_right_bt is the central in BT split mode.
+  # charybdis_left_bt is the central in BT split mode.
   # charybdis_dongle is the central in dongle mode.
   # Skip when USB logging is enabled since both use USB CDC and conflict.
   local extra_snippet=""
-  if [[ "$ENABLE_USB_LOGGING" != "true" ]] && [[ "$target" == "charybdis_right_bt" || "$target" == "charybdis_dongle" ]]; then
+  if [[ "$ENABLE_USB_LOGGING" != "true" ]] && [[ "$target" == "charybdis_left_bt" || "$target" == "charybdis_dongle" ]]; then
     extra_snippet="-S studio-rpc-usb-uart"
   fi
 

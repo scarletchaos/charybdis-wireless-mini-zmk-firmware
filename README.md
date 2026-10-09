@@ -4,6 +4,74 @@
 
 This repository offers pre-configured ZMK firmware. It's designed for the [Wireless Charybdis keyboards](https://github.com/280Zo/charybdis-wireless-mini-3x6-build-guide?tab=readme-ov-file), but is easily adaptable to other platforms. It supports the latest stable ZMK release (v0.4.1) with full Bluetooth/USB split and dongle build support (including Prospector dongles with displays), and uses the latest input listeners and processors for responsive pointer and scroll behavior.
 
+## Personal QWERTY / Bluetooth configuration
+
+The QWERTY keymap keeps the mini's numpad and home-row modifiers (including Cmd
+on both hands), with base thumbs matching the top thumb row of the 4x6 keyboard.
+The diagrams and generic overview below still describe the upstream layouts;
+the following overrides apply to QWERTY:
+
+- Base: Esc before Q; `[` after P (Х with the host's **Russian – PC** layout);
+  apostrophe `'` after semicolon (Э), replacing Delete.
+- NUM: grave/backtick on the Esc position (Ё); `]` on the `[` position (Ъ).
+- Base thumbs, left to right: **Backspace, Space, NUM** on the left;
+  **NAV, Enter** on the right. Hold Space for SYM, preserving symbol-layer access
+  on the middle left thumb. NUM and NAV are dedicated momentary layer keys.
+- SYM contains all 32 ASCII punctuation characters using standard US keycodes,
+  without editor macros. Use an English host input source for the displayed
+  symbols; the firmware does not switch macOS input sources. Backspace, Space,
+  and Enter remain available on the thumbs while Space is held for SYM.
+- NAV arrows are on **H/J/K/L** (left/down/up/right). The existing tmux horizontal
+  split shortcut moves from H to the semicolon position.
+- Tap Z to type Z; hold Z for layer 6, **Mouse**, and one-third pointer speed.
+  Hold X while Z is held to scroll; release X to return to precision pointing.
+- Vertical scrolling is reversed from the upstream default; horizontal scrolling
+  and pointer movement are unchanged.
+- In Mouse mode, the two right thumb keys are **right click, then left click**
+  (from left to right). The shared Z+X left-click combo is disabled for QWERTY, and the
+  other mouse-button combos are restricted to Base so they cannot steal scrolling.
+- Scroll/precision are now accessed through Z/X, not the former left-thumb
+  tap dance. Replacing the top-right tap dance with `[` removes its Base/Game switch.
+
+Bluetooth builds now use the **left half as central** (900 mAh battery), with the
+right half (250 mAh) forwarding keys and trackball events. The sensor driver stays
+on the right; precision/scroll processing and ZMK Studio run on the left. Connect
+USB to the **left half** for typing or Studio. This role change applies to all BT
+keymaps; dongle roles are unchanged.
+
+### Showing both battery levels on macOS
+
+The central already enables both peripheral battery fetching and battery proxying
+(`CONFIG_ZMK_SPLIT_BLE_CENTRAL_BATTERY_LEVEL_FETCHING=y` and
+`CONFIG_ZMK_SPLIT_BLE_CENTRAL_BATTERY_LEVEL_PROXY=y`). No extra firmware option is
+needed to report the right battery alongside the left one.
+
+macOS's built-in Bluetooth menu displays only the primary battery (the left half).
+[Mighty Mitts](https://github.com/codyd51/Mighty-Mitts) is a menu-bar utility that
+reads both battery levels. Download its release, connect Charybdis over Bluetooth,
+and select the keyboard in the app. USB alone does not provide this BLE service.
+The central battery is the left half; the peripheral battery is the right half.
+The app must be installed separately; it is not bundled with this firmware.
+
+### Migrating from a right-central Bluetooth build
+
+1. Record any ZMK Studio changes you want to keep (for example, screenshots),
+   and forget the old Charybdis pairing on the computer. The reset below clears
+   saved settings and pairings.
+2. Flash `settings_reset.uf2` to **both halves**, then flash each half with its
+   matching **new** `charybdis_left_bt` / `charybdis_right_bt` QWERTY firmware.
+   Do not mix old right-central and new left-central firmware.
+3. Power on both halves together, allow them to pair, then pair Charybdis with
+   the computer again.
+4. Check keys from both sides, normal trackball motion, Z precision, Z+X scroll,
+   both right-thumb clicks (including dragging), and Ё/Х/Ъ/Э in Russian – PC.
+   Also check Cmd+A, ordinary Z/X typing, and returning to normal pointer speed
+   after releasing Z/X. Hold/tap timing and radio latency need real-hardware testing.
+
+To roll back, reset both halves again and flash a matched pair of the previous
+firmware, then re-pair. Static configuration checks can be run with
+`python3 scripts/test_config.py`; firmware build instructions are below.
+
 ## Overview & Usage
 
 <!-- ![stacked keymap](keymap-drawer/stacked/stacked.svg)

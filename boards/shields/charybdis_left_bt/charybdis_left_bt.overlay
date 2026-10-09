@@ -1,5 +1,26 @@
 #include "../charybdis_common/charybdis.dtsi"
 
+/ {
+    split_inputs {
+        #address-cells = <1>;
+        #size-cells = <0>;
+
+        trackball_split: trackball_split@0 {
+            compatible = "zmk,input-split";
+            reg = <0>;
+        };
+    };
+
+    trackball_listener: trackball_listener {
+        compatible = "zmk,input-listener";
+        device = <&trackball_split>;
+        status = "okay";
+    };
+};
+
+// Layer-dependent precision and scroll processing runs on the central.
+#include "../../config/trackball/charybdis_pointer.dtsi"
+
 &kscan0 {
 	compatible = "zmk,kscan-gpio-matrix";
 	

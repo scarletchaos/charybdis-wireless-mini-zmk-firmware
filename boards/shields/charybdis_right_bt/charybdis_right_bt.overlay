@@ -1,6 +1,5 @@
 #include "../charybdis_common/charybdis.dtsi"
 #include "../charybdis_trackball/charybdis_pmw3610.dtsi"
-#include "../../config/trackball/charybdis_pointer.dtsi"
 
 // The matrix transform is 6 columns over because the left half is 6 columns wide.
 &default_transform {
@@ -32,8 +31,8 @@
 		;
 };
 
-/* enable the listener on central */
-&trackball_listener {
+/* Forward sensor events; layer-dependent processing runs on the left. */
+&trackball_split {
     status = "okay";
     device = <&trackball>;
 };

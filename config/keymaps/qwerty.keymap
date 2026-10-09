@@ -30,7 +30,7 @@
 // #define SYM     3
 // #define GAME    4
 // #define EXTRAS  5
-// #define SLOW    6
+// #define MOUSE   6
 // #define SCROLL  7
 
 // This shared keymap builds for prospector and non-prospector firmwares. 
@@ -46,19 +46,39 @@
     };
 #endif
 
+    behaviors {
+        // A stays Cmd. Hold Z for precision mouse mode; tap/quick-repeat for Z.
+        lt_mouse: mouse_layer_tap {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            flavor = "hold-preferred";
+            tapping-term-ms = <200>;
+            quick-tap-ms = <175>;
+            bindings = <&mo>, <&kp>;
+        };
+    };
+
+    combos {
+        // Z+X is now mouse mode + scroll, not the shared left-click combo.
+        /delete-node/ combo_left_click;
+        combo_middle_click { layers = <0>; };
+        combo_right_click { layers = <0>; };
+        combo_BASE_or_EXTRAS { layers = <0>; };
+    };
+
     keymap {
         compatible = "zmk,keymap";
         BASE {
             display-name = "Base";
             bindings = <
 // ╭───────────────┬────────────────┬────────────────┬─────────────────┬─────────────────┬──────╮  ╭──────┬──────────────────┬──────────────────┬─────────────────┬─────────────────┬─────────────╮
-    &kp C_AC_SEARCH  &kp Q            &kp W            &kp E             &kp R             &kp T    &kp Y   &kp U              &kp I              &kp O             &kp P           &td_layers
+    &kp ESC          &kp Q            &kp W            &kp E             &kp R             &kp T    &kp Y   &kp U              &kp I              &kp O             &kp P           &kp LBKT
 // ├───────────────┼────────────────┼────────────────┼─────────────────┼─────────────────┼──────┤  ├──────┼──────────────────┼──────────────────┼─────────────────┼─────────────────┼─────────────┤
-    &kp TAB          &ht_left_tp LCMD A  &ht_left LALT S  &ht_left LSHFT D  &ht_left LCTRL F  &kp G    &kp H   &ht_right RCTRL J  &ht_right RSHFT K  &ht_right_tp LALT L  &ht_right_tp RCMD SEMICOLON   &kp DEL
+    &kp TAB          &ht_left_tp LCMD A  &ht_left LALT S  &ht_left LSHFT D  &ht_left LCTRL F  &kp G    &kp H   &ht_right RCTRL J  &ht_right RSHFT K  &ht_right_tp RALT L  &ht_right_tp RCMD SEMICOLON   &kp SQT
 // ├───────────────┼────────────────┼────────────────┼─────────────────┼─────────────────┼──────┤  ├──────┼──────────────────┼──────────────────┼─────────────────┼─────────────────┼─────────────┤
-    &clip_hist       &kp Z            &kp X            &kp C             &kp V             &kp B    &kp N   &kp M              &mm_cm_sc          &mm_pr_col        &mm_qm_ex          &kp FSLH
+    &clip_hist       &lt_mouse 6 Z    &kp X            &kp C             &kp V             &kp B    &kp N   &kp M              &mm_cm_sc          &mm_pr_col        &mm_qm_ex          &kp FSLH
 // ╰───────────────┴────────────────┴────────────────┼─────────────────┼─────────────────┼──────┤  ├──────┼──────────────────┼──────────────────┴─────────────────┴─────────────────┴─────────────╯
-                                                             &td_esc_scrl_slow   &td_clk  &bs_num 1 BACKSPACE   &kp ENTER  &td_space_nav
+                                                             &kp BACKSPACE   &lt 3 SPACE   &mo 1             &mo 2      &kp ENTER
                                                          // ╰──────────────────┴─────────┴──────╯  ╰──────────┴──────────────╯
             >;
         };
@@ -66,7 +86,7 @@
         NUM {
             display-name = "Num";
             bindings = <
-&none   &none  &none   &none  &none          &none            &kp PLUS     &mm_f7             &mm_f8             &mm_f9             &mm_f10            &none
+&kp GRAVE &none &none  &none  &none          &none            &kp PLUS     &mm_f7             &mm_f8             &mm_f9             &mm_f10            &kp RBKT
 &trans   &none  &none  &none  &kp BACKSPACE  &kp LSHIFT       &kp KP_MINUS &mm_f4             &mm_f5             &mm_f6             &mm_f11            &none
 &none    &none  &kp X  &none  &none          &none            &kp EQUAL    &mm_f1             &mm_f2             &mm_f3             &mm_f12            &kp KP_SLASH
                        &none  &none          &trans           &kp N0     &kp SPACE
@@ -77,7 +97,7 @@
             display-name = "Nav";
             bindings = <
 &none    &msc MOVE_LEFT  &msc MOVE_UP    &none        &msc MOVE_DOWN  &msc MOVE_RIGHT     &detach_session  &create_or_attach  &next_pane   &show_sessions  &sync_panes       &none
-&kp TAB  &mkp MB4        &kp LALT        &kp LSHFT    &kp LCTRL       &mkp MB5            &h_split         &kp LEFT_ARROW     &kp DOWN     &kp UP          &kp RIGHT_ARROW   &none
+&kp TAB  &mkp MB4        &kp LALT        &kp LSHFT    &kp LCTRL       &mkp MB5            &kp LEFT_ARROW   &kp DOWN           &kp UP       &kp RIGHT_ARROW &h_split          &none
 &none    &mmv MOVE_LEFT  &mmv MOVE_DOWN  &mmv MOVE_UP &mmv MOVE_RIGHT &none               &v_split         &kp HOME           &kp PG_DN    &kp PG_UP       &kp END           &none
                                                       &none   &none   &none               &none   &trans
             >;
@@ -86,10 +106,11 @@
         SYM {
             display-name = "Sym";
             bindings = <
-&none  &kp TILDE  &kp DLLR  &kp CARET  &move_line_up    &mc_add_above      &kp AMPS   &kp PLUS     &kp LBKT  &kp RBKT  &kp PRCNT  &kp BSLH
-&none  &kp UNDER  &kp LT    &kp GT     &kp BACKSPACE    &delete_line       &kp GRAVE  &kp KP_MINUS &kp LPAR  &kp RPAR  &kp ASTRK  &kp PIPE
-&none  &home_dir  &none     &kp HASH   &move_line_down  &mc_add_below      &code_blk  &kp EQUAL    &kp LBRC  &kp RBRC  &kp AT     &kp FSLH
-                                       &none  &trans     &trans            &trans   &trans
+// Standard US punctuation; the host input source determines the printed symbols.
+&kp ESC   &kp EXCLAMATION &kp AT    &kp HASH  &kp DLLR  &kp PRCNT    &kp CARET &kp AMPS  &kp ASTRK &kp LPAR  &kp RPAR      &kp DEL
+&kp TAB   &kp BSLH        &kp FSLH  &kp MINUS &kp EQUAL &kp PLUS     &kp LBKT  &kp RBKT  &kp LBRC  &kp RBRC  &kp SEMICOLON &kp SQT
+&kp LSHFT &kp GRAVE       &kp TILDE &kp UNDER &kp LT    &kp GT       &kp PIPE  &kp COMMA &kp DOT   &kp COLON &kp DQT       &kp QUESTION
+                                  &kp BACKSPACE &trans &trans      &kp SPACE &kp ENTER
             >;
         };
 
@@ -113,18 +134,14 @@
             >;
         };
 
-        SLOW {
-            display-name = "Slow";
+        MOUSE {
+            display-name = "Mouse";
+            // Layer 6 also selects the slow-pointer processor. Hold X to scroll.
             bindings = <
-// ╭────────┬────────┬────────┬────────┬────────┬────────╮  ╭────────┬────────┬────────┬────────┬────────┬────────╮
-    &trans    &trans   &trans   &trans   &trans   &trans      &trans   &trans   &trans   &trans   &trans   &trans
-// ├────────┼────────┼────────┼────────┼────────┼────────┤  ├────────┼────────┼────────┼────────┼────────┼────────┤
-    &trans    &trans   &trans   &trans   &trans   &trans      &trans   &trans   &trans   &trans   &trans   &trans
-// ├────────┼────────┼────────┼────────┼────────┼────────┤  ├────────┼────────┼────────┼────────┼────────┼────────┤
-    &trans    &trans   &trans   &trans   &trans   &trans      &trans   &trans   &trans   &trans   &trans   &trans
-// ╰────────┴────────┴────────┼────────┼────────┼────────┤  ├────────┼────────┼────────┴────────┴────────┴────────╯
-                                  &trans   &trans   &trans      &trans   &trans
-                             // ╰────────┴────────┴────────╯  ╰────────┴────────╯
+&trans &trans &trans &trans &trans &trans    &trans &trans &trans &trans &trans &trans
+&trans &trans &trans &trans &trans &trans    &trans &trans &trans &trans &trans &trans
+&trans &trans &mo 7  &trans &trans &trans    &trans &trans &trans &trans &trans &trans
+                     &trans &trans &trans    &mkp RCLK &mkp LCLK
             >;
         };
 
